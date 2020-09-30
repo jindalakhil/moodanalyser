@@ -1,7 +1,7 @@
 package moodanalyser;
 
 import org.junit.Test;
-
+import org.junit.rules.ExpectedException;
 import org.junit.Assert;
 
 public class MoodAnalyserTest {
@@ -18,11 +18,15 @@ public class MoodAnalyserTest {
 		Assert.assertEquals("HAPPY", moodfinder.analyseMood());
 	}
 	
-	@Test(expected = NullPointerException.class)
+	@Test
 	public void givenMsg_When_Null() {
+		try {
 		MoodAnalyser moodfinder = new MoodAnalyser(null);
-		//String mood = moodfinder.analyseMood("this is happy message");
-		 moodfinder.analyseMood();
-	}
-	
+		ExpectedException e = ExpectedException.none();
+		e.expect(NullPointerException.class);
+		 Assert.assertEquals("HAPPY", moodfinder.analyseMood());
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		}
+}
 }
