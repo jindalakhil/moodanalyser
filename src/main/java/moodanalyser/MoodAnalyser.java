@@ -14,15 +14,19 @@ public class MoodAnalyser {
 		System.out.println("Welcome to mood analyser");
 	}
 	
-	public String analyseMood() {
+	public String analyseMood() throws MoodException {
 		try {
+			if(msg.isEmpty()){
+				throw new MoodException(MoodException.expectedType.EMPTY_EXCEPTION, "Empty Exception");
+			}
 			if(msg.contains("sad")) {
 				return "SAD";
 			} else {
 				return "HAPPY";
 			}
+			
 		}catch (NullPointerException e) {
-			return "HAPPY";
+			throw new MoodException(MoodException.expectedType.Null_EXCEPTION, "Null Exception");
 		}
 		
 	}
